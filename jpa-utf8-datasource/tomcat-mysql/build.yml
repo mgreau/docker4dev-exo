@@ -1,0 +1,32 @@
+# Cache for Maven (.m2 repository)
+mavencache:
+  image: busybox
+  volumes:
+   - ~/.m2:/root/.m2
+
+# Project Base
+plf-project:
+  image: busybox
+  volumes:
+   - ../task/dist/:/myproject
+
+mavenbuild:
+  image: maven:3-jdk-7
+  command: mvn validate
+  volumes_from:
+   - mavencache
+   - plf-project
+  working_dir: /myproject
+  environment:
+    MAVEN_OPTS: -Xshare:auto -Xms128M -Xmx1G -XX:MaxPermSize=256M
+
+#plftomcat:
+#   build: dev/.#
+   #command: /bin/bash
+#   ports:
+#    - "8080:8080"
+#   volumes_from:
+#    - mavenproject
+#   working_dir: /myproject
+#   links:
+#    - mavencache

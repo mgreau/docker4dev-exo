@@ -1,0 +1,43 @@
+# Project Base
+plf_project:
+  image: busybox
+  volumes:
+   - ../../task/dist/plf-enterprise-tomcat-standalone/target/platform-4.3.x-SNAPSHOT/:/myproject
+
+plf_tomcat:
+   build: .
+   name: plf_tomcat_mysql
+   ports:
+    - "8080:8080"
+   volumes_from:
+    - plf_project
+    - plf_data
+   working_dir: /myproject
+   links:
+    - plf_db:mysql-server
+   environment:
+    EXO_VERSION: 4.3.x-SNAPSHOT
+    EXO_EDITION: enterprise
+
+plf_data:
+  image: busybox
+  volumes:
+   - /srv/exo
+
+plf_db:
+  image: mysql:5.6
+  volumes_from:
+    - plf_dbdata
+  ports:
+   - "3306:3306"
+  environment:
+   - MYSQL_ROOT_PASSWORD=plf
+   - MYSQL_DATABASE=plf
+   - MYSQL_USER=plf
+   - MYSQL_PASSWORD=plf
+
+plf_dbdata:
+  image: busybox
+  command: /bin/sh
+  volumes:
+    - /var/lib/mysql
