@@ -1,4 +1,4 @@
-FROM exo/base:latest
+FROM exodev/base:latest
 MAINTAINER Maxime Gréau <mgreau@exoplatform.com>
 
 # User root user to install software

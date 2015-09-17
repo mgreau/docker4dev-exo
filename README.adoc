@@ -1,58 +1,120 @@
 = Guide
 
+== Prerequisites
+
+* docker, docker-machine and docker-compose installed
+* PLF version available
+
+[source, bash]
+----
+$ git checkout git@github.com:exoplatform/platform-private-distributions.git && cd platform-private-distributions
+$ mvn clean package -Pexo-release,exo-private -Dskip-archive
+$ cp -R plf-enterprise-jbosseap-standalone/target/platform*/platform* ../exodev-base-plf/plf43-jboss/plf
+$ cp -R plf-enterprise-tomcat-standalone/target/platform*/platform* ../exodev-base-plf/plf43-tomcat/plf
+
+== Docker Machine
+
+[source, bash]
+----
+$ docker-machine create -d virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "4096" exodev-plf
+$ eval $(docker-machine env exodev-plf)
+----
+
+To check that the conf is ok:
+[source, bash]
+----
+docker-machine inspect exodev-plf
+----
+
 == eXo Base
 
 [source, bash]
 ----
-$ cd exo-base
-$ docker build --rm=true --tag=exo/base:latest .
+$ cd exodev-base
+$ docker build --rm=true --tag=exodev/base:latest .
 $ docker images
-REPOSITORY                TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-exo/base                  latest              36d2458d9181        6 seconds ago       207.4 MB
-centos                    7                   0f73ae75014f        9 days ago          172.3 MB
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+exodev/base         latest              f27148ddd088        13 seconds ago      207.4 MB
+centos              7                   0f73ae75014f        9 days ago          172.3 MB
 ----
 
 == eXo Base JDK
 
 [source, bash]
 ----
-$ cd exo-base-jdk/jdk7
-$ docker build --rm=true --tag=exo/base-jdk:7 .
+$ cd exodev-base-jdk/jdk7
+$ docker build --rm=true --tag=exodev/base-jdk:7 .
 $ docker images
-REPOSITORY                TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-exo/base-jdk              7                   6499b0fa7864        44 seconds ago      434.4 MB
-exo/base                  latest              36d2458d9181        6 minutes ago       207.4 MB
-centos                    7                   0f73ae75014f        9 days ago          172.3 MB
+REPOSITORY          TAG                 IMAGE ID            CREATED              VIRTUAL SIZE
+exodev/base-jdk     7                   b5ddc5fd7b90        About a minute ago   434.4 MB
+exodev/base         latest              f27148ddd088        5 minutes ago        207.4 MB
+centos              7                   0f73ae75014f        9 days ago           172.3 MB
 ----
 
 == eXo Base PLF
+
+=== eXo Base PLF Common
+
+[source, bash]
+----
+$ cd exodev-base-plf/plf43-common
+$ docker build --rm=true --tag=exodev/base-plf:4.3.x .
+$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+exodev/base-plf     4.3.x               5a5e60723691        8 seconds ago       434.4 MB
+exodev/base-jdk     7                   b5ddc5fd7b90        4 minutes ago       434.4 MB
+exodev/base         latest              f27148ddd088        7 minutes ago       207.4 MB
+centos              7                   0f73ae75014f        9 days ago          172.3 MB
+----
 
 ===  eXo Base PLF JBoss
 
 [source, bash]
 ----
-$ cd exo-base-plf/plf43-jboss
-$ docker build --rm=true --tag=exo/plf-jboss:4.3.x .
+$ cd exodev-base-plf/plf43-jboss
+$ docker build --rm=true --tag=exodev/plf-jboss:4.3.x .
 $ docker images
-
+REPOSITORY          TAG                 IMAGE ID            CREATED              VIRTUAL SIZE
+exodev/plf-jboss    4.3.x               3cd0fb7ce97f        About a minute ago   816.6 MB
+exodev/base-plf     4.3.x               5a5e60723691        5 minutes ago        434.4 MB
+exodev/base-jdk     7                   b5ddc5fd7b90        9 minutes ago        434.4 MB
+exodev/base         latest              f27148ddd088        12 minutes ago       207.4 MB
+centos              7                   0f73ae75014f        9 days ago           172.3 MB
+$ docker run -p 43180:8080 -p 43190:9000 --name=plf43-jboss  exodev/plf-jboss:4.3.x
+$ open http://$(docker-machine ip exodev-plf):43180
 ----
 
 ===  eXo Base PLF Tomcat
 
 [source, bash]
 ----
-$ cd exo-base-plf/plf43-tomcat
-$ docker build --rm=true --tag=exo/plf-tomcat:4.3.x .
+$ cd exodev-base-plf/plf43-tomcat
+$ docker build --rm=true --tag=exodev/plf-tomcat:4.3.x .
 $ docker images
 REPOSITORY                TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-exo/plf-tomcat            4.3.x               d30dc3526194        6 seconds ago       919.9 MB
-exo/base-jdk              7                   2cfcf1aa73e6        26 minutes ago      434.4 MB
-exo/base                  latest              5a79a1b0145b        29 minutes ago      207.4 MB
+exodev/plf-tomcat   4.3.x               704dcc677d90        45 seconds ago      676.8 MB
+exodev/base-plf     4.3.x               7ed78a0aa4ed        4 minutes ago       434.4 MB
+exodev/base-jdk     7                   b5ddc5fd7b90        29 minutes ago      434.4 MB
+exodev/base         latest              f27148ddd088        32 minutes ago      207.4 MB
+centos              7                   0f73ae75014f        9 days ago          172.3 MB
 
-$ docker run -p 8000:8080  exo/plf-tomcat:4.3.x
-$ open http://192.168.99.101:8000
+$ docker run -p 43280:8080 --name=plf43-tomcat  exodev/plf-tomcat:4.3.x
+$ open http://$(docker-machine ip exodev-plf):43280
 ----
 
 * Remove image
 
-   docker rmi -f exo/plf-tomcat:4.3.x
+   docker rmi -f exodev/plf-tomcat:4.3.x
+
+== eXo with Addons
+
+=== PLF Tomcat Addons
+
+[source, bash]
+----
+$ cd exo-plf-addons/plf43-tomcat-task
+$ docker build --rm=true --tag=exodev/plf43-tomcat-task .
+
+$ docker run -p 8800:8080 --name=plf43-tomcat-task  exodev/plf43-tomcat-task
+$ open http://http://$(docker-machine ip exodev-plf43):8800
+----
