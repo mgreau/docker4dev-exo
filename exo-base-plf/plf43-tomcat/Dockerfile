@@ -5,7 +5,7 @@ MAINTAINER Maxime Gréau <mgreau@exoplatform.com>
 ENV EXO_JVM_SIZE_MAX 2g
 ENV EXO_JVM_SIZE_MIN 2g
 ENV EXO_JVM_PERMSIZE_MAX 256m
-ENV EXO_PROFILES -Dexo.profiles=all
+#ENV EXO_PROFILES -Dexo.profiles=all
 ENV EXO_PLF_HOME /opt/exo/plf
 
 # Add the PLF distribution to /opt, and make exo the owner of the extracted tar content

@@ -49,7 +49,7 @@ exo/plf-tomcat            4.3.x               d30dc3526194        6 seconds ago 
 exo/base-jdk              7                   2cfcf1aa73e6        26 minutes ago      434.4 MB
 exo/base                  latest              5a79a1b0145b        29 minutes ago      207.4 MB
 
-$ docker run -p 8000:8080 -v ~/tmp/plf:/opt/exo/plf exo/plf-tomcat:4.3.x
+$ docker run -p 8000:8080  exo/plf-tomcat:4.3.x
 $ open http://192.168.99.101:8000
 ----
 
