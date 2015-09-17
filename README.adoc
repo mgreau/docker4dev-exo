@@ -107,6 +107,14 @@ $ open http://$(docker-machine ip exodev-plf):43280
 
    docker rmi -f exodev/plf-tomcat:4.3.x
 
+===  eXo Base PLF Tomcat/MySQL
+
+[source, bash]
+--
+$ cd exodev-base-plf/plf43-tomcat-mysql
+$ docker build --rm=true --tag=exodev/plf-tomcat-mysql:4.3.x .
+--
+
 == eXo with Addons
 
 === PLF Tomcat Addons
@@ -118,4 +126,15 @@ $ docker build --rm=true --tag=exodev/plf43-tomcat-task .
 
 $ docker run -p 43380:8080 --name=plf43-tomcat-task  exodev/plf43-tomcat-task
 $ open http://http://$(docker-machine ip exodev-plf):43380
+----
+
+=== PLF JBoss Addons
+
+[source, bash]
+----
+$ cd exodev-plf-addons/plf43-jboss-task
+$ docker build --rm=true --tag=exodev/plf43-jboss-task .
+
+$ docker run -p 43480:8080 --name=plf43-jboss-task  exodev/plf43-jboss-task
+$ open http://http://$(docker-machine ip exodev-plf):43480
 ----

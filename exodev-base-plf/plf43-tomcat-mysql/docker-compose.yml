@@ -1,0 +1,25 @@
+plf_tomcat_mysql:
+   image: exodev/plf-tomcat-mysql:4.3.x
+   name: plf43-tomcat-mysql
+   ports:
+    - "43880:8080"
+   links:
+    - plf_db:mysql-server
+
+plf_db:
+  image: mysql:5.6
+  volumes_from:
+    - plf_dbdata
+  ports:
+   - "3306:3306"
+  environment:
+   - MYSQL_ROOT_PASSWORD=plf
+   - MYSQL_DATABASE=plf
+   - MYSQL_USER=plf
+   - MYSQL_PASSWORD=plf
+
+plf_dbdata:
+  image: busybox
+  command: /bin/sh
+  volumes:
+    - /var/lib/mysql
