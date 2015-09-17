@@ -113,7 +113,42 @@ $ open http://$(docker-machine ip exodev-plf):43280
 --
 $ cd exodev-base-plf/plf43-tomcat-mysql
 $ docker build --rm=true --tag=exodev/plf-tomcat-mysql:4.3.x .
+$ docker-compose up
 --
+
+===  eXo Base PLF Tomcat/Oracle
+
+. Run the Oracle Container with SID plf
+
+[source, bash]
+--
+$ cd exodev-base-plf/plf43-tomcat-oracle
+$ docker-compose -f oracle.yml up
+--
+
+. Check that it's running
+
+[source, bash]
+--
+$ open http://$(docker-machine ip exodev-plf):40162/apex
+--
+
+[NOTE]
+--
+Use e following credentials:
+
+* workspace: INTERNAL
+* user: ADMIN
+* password: oracle
+--
+
+. Run the tomcat container
+
+[source, bash]
+--
+$ docker-compose -f tomcat.yml up 
+--
+
 
 == eXo with Addons
 

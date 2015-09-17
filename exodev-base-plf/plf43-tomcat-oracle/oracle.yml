@@ -1,0 +1,8 @@
+plf_db_oracle:
+  image: alexeiled/docker-oracle-xe-11g
+  ports:
+   - "49160:22"
+   - "49161:1521"
+   - "49162:8080"
+  environment:
+   - ORACLE_SID=plf
