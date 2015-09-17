@@ -1,0 +1,58 @@
+= Guide
+
+== eXo Base
+
+[source, bash]
+----
+$ cd exo-base
+$ docker build --rm=true --tag=exo/base:latest .
+$ docker images
+REPOSITORY                TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+exo/base                  latest              36d2458d9181        6 seconds ago       207.4 MB
+centos                    7                   0f73ae75014f        9 days ago          172.3 MB
+----
+
+== eXo Base JDK
+
+[source, bash]
+----
+$ cd exo-base-jdk/jdk7
+$ docker build --rm=true --tag=exo/base-jdk:7 .
+$ docker images
+REPOSITORY                TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+exo/base-jdk              7                   6499b0fa7864        44 seconds ago      434.4 MB
+exo/base                  latest              36d2458d9181        6 minutes ago       207.4 MB
+centos                    7                   0f73ae75014f        9 days ago          172.3 MB
+----
+
+== eXo Base PLF
+
+===  eXo Base PLF JBoss
+
+[source, bash]
+----
+$ cd exo-base-plf/plf43-jboss
+$ docker build --rm=true --tag=exo/plf-jboss:4.3.x .
+$ docker images
+
+----
+
+===  eXo Base PLF Tomcat
+
+[source, bash]
+----
+$ cd exo-base-plf/plf43-tomcat
+$ docker build --rm=true --tag=exo/plf-tomcat:4.3.x .
+$ docker images
+REPOSITORY                TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+exo/plf-tomcat            4.3.x               d30dc3526194        6 seconds ago       919.9 MB
+exo/base-jdk              7                   2cfcf1aa73e6        26 minutes ago      434.4 MB
+exo/base                  latest              5a79a1b0145b        29 minutes ago      207.4 MB
+
+$ docker run -p 8000:8080 -v ~/tmp/plf:/opt/exo/plf exo/plf-tomcat:4.3.x
+$ open http://192.168.99.101:8000
+----
+
+* Remove image
+
+   docker rmi -f exo/plf-tomcat:4.3.x
