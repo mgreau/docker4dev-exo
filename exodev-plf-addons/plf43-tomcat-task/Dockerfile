@@ -1,4 +1,4 @@
-FROM exo/plf-tomcat:4.3.x
+FROM exodev/plf-tomcat:4.3.x
 MAINTAINER Maxime Gréau <mgreau@exoplatform.com>
 
 # Set the EXO en variable
