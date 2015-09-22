@@ -9,3 +9,7 @@ ENV EXO_PLF_HOME /opt/exo/plf
 
 # Expose the ports we're interested in
 EXPOSE 8080
+
+# Create a directory to put local addons
+RUN mkdir -p /opt/exo/addons
+VOLUME ["/opt/exo/addons"]
