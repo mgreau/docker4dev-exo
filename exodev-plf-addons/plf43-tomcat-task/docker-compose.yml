@@ -1,0 +1,15 @@
+plf_addons:
+    image: nginx:1.9.4
+    container_name: plf_addons_webserver
+    volumes:
+      - /tmp/addons:/usr/share/nginx/html
+    ports:
+     - "7777:80"
+
+plf_tomcat_hsqldb:
+   build: .
+   container_name: plf43-tomcat-task
+   ports:
+    - "43380:8080"
+   links:
+    - plf_addons:exo-addons-local

@@ -27,6 +27,22 @@ To check that the conf is ok:
 docker-machine inspect exodev-plf
 ----
 
+=== Start a Docker Machine
+
+[source, bash]
+----
+docker-machine start exodev-plf
+----
+
+=== Stop a Docker Machine
+
+[source, bash]
+----
+docker-machine stop exodev-plf
+----
+
+=== Stop a Docker Machine
+
 == eXo Base
 
 [source, bash]
@@ -114,6 +130,7 @@ $ open http://$(docker-machine ip exodev-plf):43280
 $ cd exodev-base-plf/plf43-tomcat-mysql
 $ docker build --rm=true --tag=exodev/plf-tomcat-mysql:4.3.x .
 $ docker-compose up
+$ open http://http://$(docker-machine ip exodev-plf):43380
 --
 
 ===  eXo Base PLF Tomcat/Oracle
@@ -130,7 +147,7 @@ $ docker-compose -f oracle.yml up
 
 [source, bash]
 --
-$ open http://$(docker-machine ip exodev-plf):40162/apex
+$ open http://$(docker-machine ip exodev-plf):49162/apex
 --
 
 [NOTE]

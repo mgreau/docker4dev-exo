@@ -1,7 +1,5 @@
 plf_tomcat_oracle:
    build: .
-   name: plf43-tomcat-oracle
+   container_name: plf43-tomcat-oracle-task
    ports:
-    - "43980:8080"
-   environment:
-     - ORACLE_HOST=192.168.99.103
+    - "43680:8080"

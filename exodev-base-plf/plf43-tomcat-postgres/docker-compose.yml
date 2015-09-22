@@ -1,0 +1,26 @@
+plf_tomcat_postgres:
+   build: .
+   container_name: plf43-tomcat-postgresql
+   ports:
+    - "85432:8080"
+   links:
+    - plf_db:postgres-server
+
+plf_db:
+  image: postgres:9.3
+  container_name: plf43-tomcat-postgres-db
+  volumes_from:
+    - plf_dbdata
+  ports:
+   - "5432:5432"
+  environment:
+    - POSTGRES_USER=plf
+    - POSTGRES_PASSWORD=plf
+    - POSTGRES_DB=plf
+
+plf_dbdata:
+  image: busybox
+  container_name: plf43-tomcat-postgres-dbdata
+  command: /bin/sh
+  volumes:
+    - /var/lib/postgresql

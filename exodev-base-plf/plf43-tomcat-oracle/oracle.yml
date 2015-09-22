@@ -1,5 +1,6 @@
 plf_db_oracle:
   image: alexeiled/docker-oracle-xe-11g
+  container_name: plf43-tomcat-oracle-task-db
   ports:
    - "49160:22"
    - "49161:1521"

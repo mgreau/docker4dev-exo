@@ -1,0 +1,21 @@
+[
+ {
+    "id": "exo-tasks",
+    "version": "1.0.x-SNAPSHOT",
+    "unstable": true,
+    "name": " eXo Tasks",
+    "description": "task and project management for personal and team productivity",
+    "sourceUrl": "https://github.com/exo-addons/task",
+    "documentationUrl": "https://github.com/exo-addons/task/blob/master/README.md",
+    "downloadUrl": "file://../../addons/task-management-packaging-1.0.x-SNAPSHOT.zip",
+    "vendor": "eXo",
+    "author": "Thibault Clément",
+    "authorEmail": "tclement@exoplatform.com",
+    "license": "LGPLv3",
+    "licenseUrl": "https://www.gnu.org/licenses/lgpl-3.0.txt",
+    "mustAcceptLicense": false,
+    "supportedDistributions": "community,enterprise",
+    "supportedApplicationServers": "tomcat,jboss",
+    "compatibility": "(4.2.999,)"
+ }
+]
