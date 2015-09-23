@@ -5,8 +5,10 @@ plf_tomcat_mysql:
     - "43980:8080"
    links:
     - plf_db:mysql-server
-   volumes:
-     - /Users/mgreau/Dev/Sources/docker/docker4dev-exo/exodev-plf-addons/addons:/opt/exo/addons
+  # Uncomment and Update it to use your own path if you want to add local addon to the container
+  # volumes:
+  #  - /Users/mgreau/Dev/Sources/docker/docker4dev-exo/exodev-plf-addons/addons:/opt/exo/addons
+
 
 plf_db:
   image: mysql:5.5
