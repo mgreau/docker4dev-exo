@@ -2,7 +2,7 @@ FROM exodev/plf-jboss:4.3.x
 MAINTAINER Maxime Gréau <mgreau@exoplatform.com>
 
 # Set the EXO en variable
-ENV EXO_ADDON exo-task-management:1.0.x-SNAPSHOT
+ENV EXO_ADDON exo-tasks:1.0.x-SNAPSHOT
 
 RUN ${EXO_PLF_HOME}/addon install ${EXO_ADDON} --force
 
