@@ -41,8 +41,6 @@ docker-machine start exodev-plf
 docker-machine stop exodev-plf
 ----
 
-=== Stop a Docker Machine
-
 == eXo Base
 
 [source, bash]
@@ -103,10 +101,15 @@ $ open http://$(docker-machine ip exodev-plf):43180
 
 ===  eXo Base PLF Tomcat
 
+==== Docker Image
+
+* Build image
+
 [source, bash]
 ----
 $ cd exodev-base-plf/plf43-tomcat
 $ docker build --rm=true --tag=exodev/plf-tomcat:4.3.x .
+
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 exodev/plf-tomcat   4.3.x               bc7d3fb92e2c        19 minutes ago      919.3 MB
@@ -114,14 +117,23 @@ exodev/base-plf     4.3.x               fd062cab3937        20 minutes ago      
 exodev/base-jdk     7                   b5ddc5fd7b90        52 minutes ago      434.4 MB
 exodev/base         latest              f27148ddd088        55 minutes ago      207.4 MB
 centos              7                   0f73ae75014f        9 days ago          172.3 MB
-
-$ docker run -p 43280:8080 --name=plf43-tomcat  exodev/plf-tomcat:4.3.x
-$ open http://$(docker-machine ip exodev-plf):43280
 ----
 
 * Remove image
 
    docker rmi -f exodev/plf-tomcat:4.3.x
+
+==== Run a container
+
+Once the image has been built, you can run a container from this image:
+
+[source, bash]
+----
+$ docker run -p 43280:8080 --name=plf43-tomcat  exodev/plf-tomcat:4.3.x
+$ open http://$(docker-machine ip exodev-plf):43280
+----
+
+
 
 ===  eXo Base PLF Tomcat/MySQL
 
@@ -171,11 +183,31 @@ $ docker-compose -f tomcat.yml up
 
 === PLF Tomcat Addons
 
+==== Remote add-on
+
+If the add-on is available on the remote catalog, you just have to build an image like below:
+
 [source, bash]
 ----
-$ cd exodev-plf-addons/plf43-tomcat-task
+$ docker-compose up -d
+$ open http://http://$(docker-machine ip exodev-plf):43380
+----
+
+==== Local add-on
+
+If you want to test a local add-on, you have to add it to your image with a Docker volume:
+
+. build your add-on locally with Maven
+. copy the ZIP file to *exodev-plf-addons/plf43-tomcat-task/local/resources/task-addon.zip*
+. update the docker-compose.yml file to
+
+[source, bash]
+----
+# Build
+$ cd exodev-plf-addons/plf43-tomcat-task/local
 $ docker build --rm=true --tag=exodev/plf43-tomcat-task .
 
+# Run
 $ docker run -p 43380:8080 --name=plf43-tomcat-task  exodev/plf43-tomcat-task
 $ open http://http://$(docker-machine ip exodev-plf):43380
 ----

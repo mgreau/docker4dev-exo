@@ -7,7 +7,7 @@
     "description": "task and project management for personal and team productivity",
     "sourceUrl": "https://github.com/exo-addons/task",
     "documentationUrl": "https://github.com/exo-addons/task/blob/master/README.md",
-    "downloadUrl": "http://exo-addons-local:77777/task-management-packaging-1.0.x-SNAPSHOT.zip",
+    "downloadUrl": "file://../../addons/task-management-packaging-1.0.x-SNAPSHOT.zip",
     "vendor": "eXo",
     "author": "Thibault Clément",
     "authorEmail": "tclement@exoplatform.com",

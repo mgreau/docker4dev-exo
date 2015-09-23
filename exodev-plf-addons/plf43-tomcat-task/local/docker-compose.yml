@@ -1,0 +1,8 @@
+plf_tomcat_hsqldb:
+   build: .
+   container_name: plf43-tomcat-task
+   ports:
+    - "43380:8080"
+  # Uncomment and Update it to use your own path, if you want to add local addon to the container
+  # volumes:
+  #  - /Users/mgreau/Dev/Sources/docker/docker4dev-exo/exodev-plf-addons/addons:/opt/exo/addons

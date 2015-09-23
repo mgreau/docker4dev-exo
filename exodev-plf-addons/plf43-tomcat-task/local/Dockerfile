@@ -5,7 +5,7 @@ MAINTAINER Maxime Gréau <mgreau@exoplatform.com>
 ENV EXO_ADDON exo-tasks:1.0.x-SNAPSHOT
 
 ADD resources/local.json /opt/exo/plf/addons/local.json
-ADD resources/addon-task.zip /opt/exo/addons/addon-task.zip
+ADD resources/task-addon.zip /opt/exo/addons/task-management-packaging-1.0.x-SNAPSHOT.zip
 
 # Hack because of https://github.com/docker/docker/issues/6119
 USER root

@@ -1,0 +1,5 @@
+plf_tomcat_hsqldb:
+   build: .
+   container_name: plf43-tomcat-task
+   ports:
+    - "43380:8080"
