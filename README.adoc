@@ -218,18 +218,12 @@ $ open http://http://$(docker-machine ip exodev-plf):43380
 If you want to test a local add-on, you have to add it to your image with a Docker volume:
 
 . build your add-on locally with Maven
-. copy the ZIP file to *exodev-plf-addons/plf43-tomcat-task/local/resources/task-addon.zip*
-. update the docker-compose.yml file to
-
+. copy the ZIP file to *exodev-plf-addons/plf43-tomcat-XXX-task/local/resources/task-addon.zip*
+. execute the following commands:
 [source, bash]
 ----
-# Build
-$ cd exodev-plf-addons/plf43-tomcat-task/local
-$ docker build --rm=true --tag=exodev/plf43-tomcat-task .
-
-# Run
-$ docker run -p 43380:8080 --name=plf43-tomcat-task  exodev/plf43-tomcat-task
-$ open http://http://$(docker-machine ip exodev-plf):43380
+$ docker-compose up
+$ open http://$(docker-machine ip exodev-plf):43380
 ----
 
 === PLF JBoss Addons
