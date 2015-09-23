@@ -15,5 +15,11 @@ RUN mv ${EXO_PLF_HOME}/conf/server-oracle.xml ${EXO_PLF_HOME}/conf/server.xml \
    && sed -i "s/password=\"plf\"/password=\"${ORACLE_PWD}\"/g" ${EXO_PLF_HOME}/conf/server.xml \
    && curl -L -o ${EXO_PLF_HOME}/lib/ojdbc6-${ORACLE_DRIVER_VERSION}.jar https://code.lds.org/nexus/content/groups/main-repo/com/oracle/ojdbc6/${ORACLE_DRIVER_VERSION}/ojdbc6-${ORACLE_DRIVER_VERSION}.jar
 
+
+# Set the EXO en variable
+ENV EXO_ADDON exo-tasks:1.0.x-SNAPSHOT
+
+RUN ${EXO_PLF_HOME}/addon install ${EXO_ADDON} --force
+
 # Set the default command to run on boot
 CMD ["/opt/exo/plf/start_eXo.sh"]

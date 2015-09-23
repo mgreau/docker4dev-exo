@@ -84,6 +84,8 @@ centos              7                   0f73ae75014f        9 days ago          
 
 ===  eXo Base PLF JBoss
 
+==== Docker Image
+
 [source, bash]
 ----
 $ cd exodev-base-plf/plf43-jboss
@@ -95,6 +97,12 @@ exodev/base-plf     4.3.x               fd062cab3937        20 minutes ago      
 exodev/base-jdk     7                   b5ddc5fd7b90        52 minutes ago      434.4 MB
 exodev/base         latest              f27148ddd088        55 minutes ago      207.4 MB
 centos              7                   0f73ae75014f        9 days ago          172.3 MB
+----
+
+==== Run a container
+
+[source, bash]
+----
 $ docker run -p 43180:8080 -p 43190:9990 --name=plf43-jboss  exodev/plf-jboss:4.3.x
 $ open http://$(docker-machine ip exodev-plf):43180
 ----
@@ -137,10 +145,22 @@ $ open http://$(docker-machine ip exodev-plf):43280
 
 ===  eXo Base PLF Tomcat/MySQL
 
+==== Docker Image
+
+* Build image
+
 [source, bash]
 --
 $ cd exodev-base-plf/plf43-tomcat-mysql
 $ docker build --rm=true --tag=exodev/plf-tomcat-mysql:4.3.x .
+--
+
+==== Run a container
+
+Once the image has been built, you can run a container from this image:
+
+[source, bash]
+--
 $ docker-compose up
 $ open http://http://$(docker-machine ip exodev-plf):43380
 --

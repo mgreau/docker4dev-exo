@@ -1,0 +1,5 @@
+plf_tomcat_oracle:
+   build: .
+   container_name: plf43-tomcat-oracle-task
+   ports:
+    - "43680:8080"
