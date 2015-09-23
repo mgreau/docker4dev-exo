@@ -97,7 +97,7 @@ exodev/base-plf     4.3.x               fd062cab3937        20 minutes ago      
 exodev/base-jdk     7                   b5ddc5fd7b90        52 minutes ago      434.4 MB
 exodev/base         latest              f27148ddd088        55 minutes ago      207.4 MB
 centos              7                   0f73ae75014f        9 days ago          172.3 MB
-$ docker run -p 43180:8080 -p 43190:9000 --name=plf43-jboss  exodev/plf-jboss:4.3.x
+$ docker run -p 43180:8080 -p 43190:9990 --name=plf43-jboss  exodev/plf-jboss:4.3.x
 $ open http://$(docker-machine ip exodev-plf):43180
 ----
 
@@ -187,6 +187,6 @@ $ open http://http://$(docker-machine ip exodev-plf):43380
 $ cd exodev-plf-addons/plf43-jboss-task
 $ docker build --rm=true --tag=exodev/plf43-jboss-task .
 
-$ docker run -p 43480:8080 --name=plf43-jboss-task  exodev/plf43-jboss-task
+$ docker run -p 43480:8080 -p 43490:9990 --name=plf43-jboss-task  exodev/plf43-jboss-task
 $ open http://http://$(docker-machine ip exodev-plf):43480
 ----
