@@ -7,7 +7,7 @@ plf_tomcat_mysql:
     - plf_db:mysql-server
 
 plf_db:
-  image: mysql:5.6
+  image: mysql:5.5
   volumes_from:
     - plf_dbdata
   ports:

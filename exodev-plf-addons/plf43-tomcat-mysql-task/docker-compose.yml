@@ -9,7 +9,7 @@ plf_tomcat_mysql:
      - /Users/mgreau/Dev/Sources/docker/docker4dev-exo/exodev-plf-addons/addons:/opt/exo/addons
 
 plf_db:
-  image: mysql:5.6
+  image: mysql:5.5
   container_name: plf43-tomcat-mysql-task-db
   volumes_from:
     - plf_dbdata
