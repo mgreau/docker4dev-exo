@@ -162,7 +162,7 @@ Once the image has been built, you can run a container from this image:
 [source, bash]
 --
 $ docker-compose up
-$ open http://http://$(docker-machine ip exodev-plf):43380
+$ open http://$(docker-machine ip exodev-plf):43380
 --
 
 ===  eXo Base PLF Tomcat/Oracle
@@ -210,7 +210,7 @@ If the add-on is available on the remote catalog, you just have to build an imag
 [source, bash]
 ----
 $ docker-compose up -d
-$ open http://http://$(docker-machine ip exodev-plf):43380
+$ open http://$(docker-machine ip exodev-plf):43380
 ----
 
 ==== Local add-on
@@ -234,5 +234,5 @@ $ cd exodev-plf-addons/plf43-jboss-task
 $ docker build --rm=true --tag=exodev/plf43-jboss-task .
 
 $ docker run -p 43480:8080 -p 43490:9990 --name=plf43-jboss-task  exodev/plf43-jboss-task
-$ open http://http://$(docker-machine ip exodev-plf):43480
+$ open http://$(docker-machine ip exodev-plf):43480
 ----

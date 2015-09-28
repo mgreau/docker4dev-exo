@@ -1,0 +1,8 @@
+= Getting Started PLF / SQL Server
+
+. Download VirtualBox Windows 7
+.. https://dev.modern.ie/tools/vms/linux/
+. Download SQL Server 2012
+.. https://www.microsoft.com/fr-fr/download/details.aspx?id=29066
+. Download Java Driver
+.. https://msdn.microsoft.com/en-us/sqlserver/aa937724
