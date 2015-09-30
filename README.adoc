@@ -1,4 +1,9 @@
-= Guide
+= Developer Guide for PLF & Docker
+:toc: preamble
+:toclevels: 4
+
+This guide explains how to use Docker on a dev laptop
+to be able to quickly test and debug eXo PLF in several targets (applications servers and databases).
 
 == Prerequisites
 
@@ -13,7 +18,11 @@ $ cp -R plf-enterprise-jbosseap-standalone/target/platform*/platform* ../exodev-
 $ cp -R plf-enterprise-tomcat-standalone/target/platform*/platform* ../exodev-base-plf/plf43-tomcat/plf
 --
 
-== Docker Machine
+=== Docker Engine
+
+TODO
+
+=== Docker Machine
 
 [source, bash]
 --
@@ -27,21 +36,31 @@ To check that the conf is ok:
 docker-machine inspect exodev-plf
 ----
 
-=== Start a Docker Machine
+==== Start a Docker Machine
 
 [source, bash]
 ----
 docker-machine start exodev-plf
 ----
 
-=== Stop a Docker Machine
+==== Stop a Docker Machine
 
 [source, bash]
 ----
 docker-machine stop exodev-plf
 ----
 
-== eXo Base
+=== Docker Compose
+
+TODO
+
+=== All in one (Docker Toolbox)
+
+https://www.docker.com/toolbox
+
+== Docker images & run
+
+=== eXo Base
 
 [source, bash]
 ----
@@ -53,7 +72,7 @@ exodev/base         latest              f27148ddd088        13 seconds ago      
 centos              7                   0f73ae75014f        9 days ago          172.3 MB
 ----
 
-== eXo Base JDK
+=== eXo Base JDK
 
 [source, bash]
 ----
@@ -66,9 +85,9 @@ exodev/base         latest              f27148ddd088        5 minutes ago       
 centos              7                   0f73ae75014f        9 days ago           172.3 MB
 ----
 
-== eXo Base PLF
+=== eXo Base PLF
 
-=== eXo Base PLF Common
+==== eXo Base PLF Common
 
 [source, bash]
 ----
@@ -82,9 +101,9 @@ exodev/base         latest              f27148ddd088        7 minutes ago       
 centos              7                   0f73ae75014f        9 days ago          172.3 MB
 ----
 
-===  eXo Base PLF JBoss
+====  eXo Base PLF JBoss
 
-==== Docker Image
+===== Docker Image
 
 [source, bash]
 ----
@@ -99,7 +118,7 @@ exodev/base         latest              f27148ddd088        55 minutes ago      
 centos              7                   0f73ae75014f        9 days ago          172.3 MB
 ----
 
-==== Run a container
+===== Run a container
 
 [source, bash]
 ----
@@ -107,9 +126,9 @@ $ docker run -p 43180:8080 -p 43190:9990 --name=plf43-jboss  exodev/plf-jboss:4.
 $ open http://$(docker-machine ip exodev-plf):43180
 ----
 
-===  eXo Base PLF Tomcat
+====  eXo Base PLF Tomcat
 
-==== Docker Image
+===== Docker Image
 
 * Build image
 
@@ -131,7 +150,7 @@ centos              7                   0f73ae75014f        9 days ago          
 
    docker rmi -f exodev/plf-tomcat:4.3.x
 
-==== Run a container
+===== Run a container
 
 Once the image has been built, you can run a container from this image:
 
@@ -143,9 +162,9 @@ $ open http://$(docker-machine ip exodev-plf):43280
 
 
 
-===  eXo Base PLF Tomcat/MySQL
+====  eXo Base PLF Tomcat/MySQL
 
-==== Docker Image
+===== Docker Image
 
 * Build image
 
@@ -155,7 +174,7 @@ $ cd exodev-base-plf/plf43-tomcat-mysql
 $ docker build --rm=true --tag=exodev/plf-tomcat-mysql:4.3.x .
 --
 
-==== Run a container
+===== Run a container
 
 Once the image has been built, you can run a container from this image:
 
@@ -165,7 +184,7 @@ $ docker-compose up
 $ open http://$(docker-machine ip exodev-plf):43380
 --
 
-===  eXo Base PLF Tomcat/Oracle
+====  eXo Base PLF Tomcat/Oracle
 
 . Run the Oracle Container with SID plf
 
@@ -199,11 +218,11 @@ $ docker-compose -f tomcat.yml up
 --
 
 
-== eXo with Addons
+=== eXo with Addons
 
-=== PLF Tomcat Addons
+==== PLF Tomcat Addons
 
-==== Remote add-on
+===== Remote add-on
 
 If the add-on is available on the remote catalog, you just have to build an image like below:
 
@@ -213,7 +232,7 @@ $ docker-compose up -d
 $ open http://$(docker-machine ip exodev-plf):43380
 ----
 
-==== Local add-on
+===== Local add-on
 
 If you want to test a local add-on, you have to add it to your image with a Docker volume:
 
@@ -226,7 +245,7 @@ $ docker-compose up
 $ open http://$(docker-machine ip exodev-plf):43380
 ----
 
-=== PLF JBoss Addons
+==== PLF JBoss Addons
 
 [source, bash]
 ----
@@ -236,3 +255,14 @@ $ docker build --rm=true --tag=exodev/plf43-jboss-task .
 $ docker run -p 43480:8080 -p 43490:9990 --name=plf43-jboss-task  exodev/plf43-jboss-task
 $ open http://$(docker-machine ip exodev-plf):43480
 ----
+
+== Debug in a container
+
+=== JBoss PLF HSQLDB
+
+. First run a container without started the app server, and get into it:
+
+  $ docker run -it --entrypoint /bin/bash -p 7779:8787  -p 8889:8080 --name=ct-plf43-jboss-task exodev/plf43-jboss-task
+  $ ./plf/bin/standalone.sh -b 0.0.0.0 --debug 8787
+
+. Open your IDE and configure a remote connection to *$(docker-machine ip exodev-plf) 7779*
