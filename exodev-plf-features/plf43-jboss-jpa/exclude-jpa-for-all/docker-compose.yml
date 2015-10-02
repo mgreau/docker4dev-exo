@@ -1,0 +1,6 @@
+plf_jboss_jpa:
+   build: .
+   container_name: plf43-jboss-jpa-ex4all
+   ports:
+    - "43220:8080"
+    - "43227:8787"

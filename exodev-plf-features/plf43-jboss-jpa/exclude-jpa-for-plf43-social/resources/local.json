@@ -1,0 +1,18 @@
+[
+ {
+    "id": "exo-social-rdbms",
+    "version": "1.0.x-SNAPSHOT",
+    "unstable": true,
+    "name": "eXo Social in RDBMS",
+    "description": "A database implementation of eXo Social",
+    "sourceUrl": "https://github.com/exo-addons/social-rdbms",
+    "downloadUrl": "file://../../addons/social-rdbms-addons-bundle-1.0.x-SNAPSHOT.zip",
+    "vendor": "eXo",
+    "license": "LGPLv3",
+    "licenseUrl": "https://www.gnu.org/licenses/lgpl-3.0.txt",
+    "mustAcceptLicense": false,
+    "supportedDistributions": "community,enterprise",
+    "supportedApplicationServers": "tomcat,jboss",
+    "compatibility": "(4.2.999,)"
+  }
+]

@@ -1,0 +1,49 @@
+= Configuration to use JPA in PLF on JBoss EAP 6.2
+
+Tests to be able to make PLF works with JPA on EAP6.2.
+These tests are done with task and social-rdbms addons.
+
+== 1st option: exclude JPA for all
+
+. Build a plf eap standalone package from commit *32cf252ddf6c8e39880bf1832578dfae185814f5* on develop branch with the private packaging maven project.
+. Copy the standalone eap packaging to *exclude-jpa-for-all* path as plf directory
+
+[source, bash]
+----
+$ cd exclude-jpa-for-all
+$ docker-compose up
+$ open http://$(docker-machine ip exodev-plf):43220
+----
+
+== 2nd option: not exclude JPA
+
+Just use a PLF43 distribution SNAPSHOT before the October 2, Friday and task addon
+
+== 3rd option: exclude JPA only for PLF deployment
+
+=== Test with Social RDBMS
+
+. Build a plf eap standalone package from feature/social-rdbms branch with the private packaging maven project
+. Copy the standalone eap packaging to *exclude-jpa-for-plf43-social* path as plf directory
+. Build the social-redbms bundle locally from commit *84759068994c0c211a114431e9e7308172345841* to not have to install elasticsearch.
+. Copy bundle zip to *docker4dev-exo/exodev-plf-features/exclude-jpa-for-plf43-social/resources/addons/social-addons.zip*
+. Build & Run
+
+[source, bash]
+----
+$ cd exclude-jpa-for-plf43-social
+$ docker-compose up
+$ open http://$(docker-machine ip exodev-plf):43320
+----
+
+=== Test with Task
+
+. Build a plf eap standalone package from commit *32cf252ddf6c8e39880bf1832578dfae185814f5* on develop branch with the private packaging maven project.
+. Copy the standalone eap packaging to *exclude-jpa-for-plf43-task* path as plf directory
+
+[source, bash]
+----
+$ cd exclude-jpa-for-plf43-task
+$ docker-compose up
+$ open http://$(docker-machine ip exodev-plf):43220
+----

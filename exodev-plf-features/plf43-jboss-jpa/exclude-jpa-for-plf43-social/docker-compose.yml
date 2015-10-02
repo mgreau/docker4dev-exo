@@ -1,0 +1,8 @@
+plf_jboss_jpa:
+   build: .
+   container_name: plf43-jboss-jpa-ex4plf-social
+   ports:
+    - "43420:8080"
+    - "43427:8787"
+   #volumes:
+  #   - /Users/mgreau/Dev/Sources/docker/docker4dev-exo/exodev-plf-addons/addons:/opt/exo/addons
