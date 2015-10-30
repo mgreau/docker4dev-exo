@@ -12,6 +12,7 @@ ADD resources/jboss-deployment-structure.xml plf/standalone/deployments/platform
 # Hack because of https://github.com/docker/docker/issues/6119
 USER root
 RUN chown -R exo:exo ${EXO_PLF_HOME}
+RUN chown -R exo:exo /opt/exo/addons
 USER exo
 
 # Set the EXO en variable
