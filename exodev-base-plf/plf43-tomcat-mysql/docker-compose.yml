@@ -2,7 +2,7 @@ plf_tomcat_mysql:
    image: exodev/plf-tomcat-mysql:4.3.x
    name: plf43-tomcat-mysql
    ports:
-    - "83306:8080"
+    - "8306:8080"
    links:
     - plf_db:mysql-server
 
